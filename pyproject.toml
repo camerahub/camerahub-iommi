@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "camerahub-iommi"
+version = "0.1.0"
+description = "CameraHub with Iommi UI"
+authors = ["Jonathan Gazeley <me@jonathangazeley.com>"]
+readme = "README.md"
+packages = [{include = "camerahub_iommi"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+Django = "^5.0.1"
+iommi = "^6.4.0"
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.0.3"
+autopep8 = "^2.0.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
