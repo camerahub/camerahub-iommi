@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "camerahub-iommi"
+name = "camerahub"
 version = "0.1.0"
 description = "CameraHub with Iommi UI"
 authors = ["Jonathan Gazeley <me@jonathangazeley.com>"]
 readme = "README.md"
-packages = [{include = "camerahub_iommi"}]
+packages = [{include = "camerahub"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
