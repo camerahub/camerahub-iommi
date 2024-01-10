@@ -1,4 +1,4 @@
-from iommi import Form, Table
+from iommi import Form, Table, Action, html
 from django.urls import path
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from iommi import register_factory
@@ -16,6 +16,7 @@ register_factory(TaggableManager, shortcut_name='many_to_many')
 
 urlpatterns = [
     # ...your urls...
-    path('manufacturer', Table(auto__model=Manufacturer).as_view()),
-    path('manufacturer/create', Form.create(auto__model=Manufacturer).as_view()),
+    path('', Table(auto__model=Manufacturer).as_view(), name='index'),
+    path('manufacturer/', Table(auto__model=Manufacturer, container__children__bar=html.div('Bar', after=0), columns__name__filter__include=True, actions__add=Action(attrs__href='/'), ).as_view(), name='manufacturer-list'),
+    path('manufacturer/create', Form.create(auto__model=Manufacturer).as_view(), name='manufacturer-create'),
 ]
