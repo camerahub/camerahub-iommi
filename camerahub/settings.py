@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'iommi',
     'taggit',
     'schema',
+    'ui',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 GEOPOSITION_GOOGLE_MAPS_API_KEY = ''
+
+# These imports need to be at the bottom of the file!
+from iommi import Style, Asset
+from iommi.style_bootstrap import bootstrap
+
+IOMMI_DEFAULT_STYLE = Style(
+    bootstrap,
+    base_template='iommi_base.html',
+#    root__assets=dict(
+#        my_project_custom_css=Asset.css(attrs__href='/static/custom.css'),
+#        my_project_custom_js=Asset.js(attrs__src='/static/custom.js'),
+#    ),
+)
