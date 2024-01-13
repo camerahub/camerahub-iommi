@@ -1,4 +1,4 @@
-from iommi import Form, Table, Action, html
+from iommi import Form, Table
 from django.urls import path
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from iommi import register_factory
@@ -8,6 +8,7 @@ from taggit.managers import TaggableManager
 
 # Import any models you need from your models.  Here I'm using Album
 from schema.models import Manufacturer
+from .tables import manufacturer_table
 
 # Workaround for https://github.com/iommirocks/iommi/issues/339
 register_factory(GenericRelation, factory=None)
@@ -17,6 +18,6 @@ register_factory(TaggableManager, shortcut_name='many_to_many')
 urlpatterns = [
     # ...your urls...
     path('', Table(auto__model=Manufacturer).as_view(), name='index'),
-    path('manufacturer/', Table(auto__model=Manufacturer, container__children__bar=html.div('Bar', after=0), query_from_indexes=True, actions__add=Action(attrs__href='/'), ).as_view(), name='manufacturer-list'),
+    path('manufacturer/', manufacturer_table, name='manufacturer-list'),
     path('manufacturer/create', Form.create(auto__model=Manufacturer).as_view(), name='manufacturer-create'),
 ]
