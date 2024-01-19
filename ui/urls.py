@@ -10,7 +10,7 @@ from taggit.managers import TaggableManager
 from schema.models import Manufacturer
 
 from .pages import manufacturer_view
-from .tables import manufacturer_table
+from .tables import ManufacturerTable
 
 # Workaround for https://github.com/iommirocks/iommi/issues/339
 register_factory(GenericRelation, factory=None)
@@ -25,7 +25,7 @@ register_path_decoding(
 urlpatterns = [
     # ...your urls...
     path('', Table(auto__model=Manufacturer).as_view(), name='index'),
-    path('manufacturer/', manufacturer_table, name='manufacturer-list'),
+    path('manufacturer/', ManufacturerTable().as_view(), name='manufacturer-list'),    
     path('manufacturer/create', Form.create(auto__model=Manufacturer).as_view(), name='manufacturer-create'),
     path('manufacturer/<slug>/', manufacturer_view)
 ]
