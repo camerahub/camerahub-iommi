@@ -7,10 +7,10 @@ from iommi.path import register_path_decoding
 from taggit.managers import TaggableManager
 
 # Import any models you need from your models.  Here I'm using Album
-from schema.models import Manufacturer
+from schema.models import Manufacturer, CameraModel
 
 from .pages import manufacturer_view
-from .tables import ManufacturerTable
+from .tables import ManufacturerTable, CameraModelTable
 
 # Workaround for https://github.com/iommirocks/iommi/issues/339
 register_factory(GenericRelation, factory=None)
@@ -27,5 +27,8 @@ urlpatterns = [
     path('', Table(auto__model=Manufacturer).as_view(), name='index'),
     path('manufacturer/', ManufacturerTable().as_view(), name='manufacturer-list'),    
     path('manufacturer/create', Form.create(auto__model=Manufacturer).as_view(), name='manufacturer-create'),
-    path('manufacturer/<slug>/', manufacturer_view)
+    path('manufacturer/<slug>/', manufacturer_view, name='manufacturer-detail'),
+
+    path('cameramodel/', CameraModelTable().as_view(), name='cameramodel-list'), 
+    path('cameramodel/create', Form.create(auto__model=CameraModel).as_view(), name='cameramodel-create'),
 ]
