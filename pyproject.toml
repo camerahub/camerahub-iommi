@@ -21,6 +21,7 @@ django-geoposition-2 = "^0.4.0"
 django-colorfield = "^0.11.0"
 django-choices = "^2.0.0"
 numpy = "^1.26.3"
+django-registration = "^3.4"
 
 [tool.poetry.group.dev.dependencies]
 pylint = "^3.0.3"
