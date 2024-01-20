@@ -11,56 +11,39 @@ from schema.models import Mount, MountAdapter, NegativeSize, PaperStock, Person,
 from schema.models import Process, Scan, Negative, Film, Teleconverter, TeleconverterModel, Toner
 from taggit.models import Tag
 
-#class CameraModelTable(Table):
-#    class Meta:
-#        auto__model=CameraModel
-#        query_from_indexes=True
-#        actions__add=Action(attrs__href=reverse_lazy('cameramodel-create'))
-
 class AccessoryTable(Table):
-    id_owner = Column()
-    model = Column()
-    type = Column()
     class Meta:
         auto__model = Accessory
+        auto__include=['id_owner', 'model', 'type']
 
 class ArchiveTable(Table):
     class Meta:  
         auto__model = Archive
-        #fields = ('name', 'type', 'max_size', 'sealed')
+        auto__include= ('name', 'type', 'max_size', 'sealed')
 
 
 class BatteryTable(Table):
     class Meta:
         auto__model = Battery
-        #fields = ('name', 'voltage', 'chemistry')
+        auto__include= ('name', 'voltage', 'chemistry')
 
 
 class BulkFilmTable(Table):
     class Meta:
         auto__model = BulkFilm
-        #fields = ('id_owner', 'format', 'filmstock', 'length', 'finished')
+        auto__include= ('id_owner', 'format', 'filmstock', 'length', 'finished')
 
 
 class CameraTable(Table):
     class Meta:
         auto__model = Camera
-        #fields = ('id_owner', 'cameramodel', 'serial', 'manufactured', 'cameramodel__mount', 'cameramodel__lens_model_name', 'own')
+        auto__include= ('id_owner', 'cameramodel', 'serial', 'manufactured', 'cameramodel__mount', 'cameramodel__lens_model_name', 'own')
 
 
 class CameraModelTable(Table):
-    model = Column()
-    mount = Column()
-    lens_model_name = Column()
-    format = Column()
-    introduced = Column()
-    body_type = Column()
-    negative_size = Column()
-
     class Meta:
         auto__model=CameraModel
-        # Disable some columns
-        columns__disambiguation__include = False
+        auto__include=('manufacturer', 'model', 'mount', 'lens_model_name', 'format', 'introduced', 'body_type', 'negative_size')
         query_from_indexes=True
         actions__add=Action(attrs__href=reverse_lazy('cameramodel-create'))
 
@@ -68,61 +51,61 @@ class CameraModelTable(Table):
 class DeveloperTable(Table):
     class Meta:
         auto__model = Developer
-        #fields = ('name', 'for_paper', 'for_film')
+        auto__include= ('name', 'for_paper', 'for_film')
 
 
 class EnlargerModelTable(Table):
     class Meta:
         auto__model = EnlargerModel
-        #fields = ('model', 'negative_size', 'type')
+        auto__include= ('model', 'negative_size', 'type')
 
 
 class EnlargerTable(Table):
     class Meta:
         auto__model = Enlarger
-        #fields = ('id_owner', 'enlargermodel')
+        auto__include= ('id_owner', 'enlargermodel')
 
 
 class FilmStockTable(Table):
     class Meta:
         auto__model = FilmStock
-        #fields = ('name', 'iso', 'colour', 'panchromatic', 'process')
+        auto__include= ('name', 'iso', 'colour', 'panchromatic', 'process')
 
 
 class FilterTable(Table):
     class Meta:
         auto__model = Filter
-        #fields = ('type', 'shortname', 'attenuation')
+        auto__include= ('type', 'shortname', 'attenuation')
 
 
 class FlashModelTable(Table):
     class Meta:
         auto__model = FlashModel
-        #fields = ('model', 'guide_number', 'ttl')
+        auto__include= ('model', 'guide_number', 'ttl')
 
 
 class FlashTable(Table):
     class Meta:
         auto__model = Flash
-        #fields = ('id_owner', 'flashmodel')
+        auto__include= ('id_owner', 'flashmodel')
 
 
 class FormatTable(Table):
     class Meta:
         auto__model = Format
-        #fields = ('format',)
+        auto__include= ('format',)
 
 
 class LensTable(Table):
     class Meta:
         auto__model = Lens
-        #fields = ('id_owner', 'lensmodel', 'lensmodel__mount', 'serial', 'manufactured', 'own')
+        auto__include= ('id_owner', 'lensmodel', 'lensmodel__mount', 'serial', 'manufactured', 'own')
 
 
 class LensModelTable(Table):
     class Meta:
         auto__model = LensModel
-        #fields = ('model', 'mount', 'zoom', 'focal_length', 'max_aperture', 'autofocus', 'introduced')
+        auto__include= ('model', 'mount', 'zoom', 'focal_length', 'max_aperture', 'autofocus', 'introduced')
 
 
 class ManufacturerTable(Table):
@@ -137,82 +120,82 @@ class ManufacturerTable(Table):
 class MountTable(Table):
     class Meta:
         auto__model = Mount
-        #fields = ('mount', 'shutter_in_lens', 'type', 'purpose')
+        auto__include= ('mount', 'shutter_in_lens', 'type', 'purpose')
 
 
 class MountAdapterTable(Table):
     class Meta:
         auto__model = MountAdapter
-        #fields = ('id_owner', 'camera_mount', 'lens_mount', 'has_optics', 'infinity_focus')
+        auto__include= ('id_owner', 'camera_mount', 'lens_mount', 'has_optics', 'infinity_focus')
 
 
 class NegativeSizeTable(Table):
     class Meta:
         auto__model = NegativeSize
-        #fields = ('name', 'size', 'crop_factor', 'area', 'aspect_ratio')
+        auto__include= ('name', 'size', 'crop_factor', 'area', 'aspect_ratio')
 
 
 class PaperStockTable(Table):
     class Meta:
         auto__model = PaperStock
-        #fields = ('name', 'resin_coated', 'colour', 'finish')
+        auto__include= ('name', 'resin_coated', 'colour', 'finish')
 
 
 class PersonTable(Table):
     class Meta:
         auto__model = Person
-        #fields = ('id_owner', 'name', 'type')
+        auto__include= ('id_owner', 'name', 'type')
 
 
 class PrintTable(Table):
     class Meta:
         auto__model = Print
-        #fields = ('id_owner', 'negative', 'date', 'size', 'own', 'archive')
+        auto__include= ('id_owner', 'negative', 'date', 'size', 'own', 'archive')
 
 
 class ProcessTable(Table):
     class Meta:
         auto__model = Process
-        #fields = ('name', 'colour', 'positive')
+        auto__include= ('name', 'colour', 'positive')
 
 
 class ScanTable(Table):
     class Meta:
         auto__model = Scan
-        #fields = ('uuid', 'negative', 'print', 'filename', 'date')
+        auto__include= ('uuid', 'negative', 'print', 'filename', 'date')
 
 
 class NegativeTable(Table):
     class Meta:
         auto__model = Negative
-        #fields = ('slug', 'film', 'date', 'film__camera', 'lens', 'shutter_speed', 'aperture')
+        auto__include= ('slug', 'film', 'date', 'film__camera', 'lens', 'shutter_speed', 'aperture')
 
 
 class FilmTable(Table):
     class Meta:
         auto__model = Film
-        #fields = ('id_owner', 'filmstock', 'format', 'status', 'negative_set__count', 'date_processed', 'camera')
+        auto__include= ('id_owner', 'filmstock', 'format', 'status', 'negative_set__count', 'date_processed', 'camera')
 
 
 class TagTable(Table):
     class Meta:
         auto__model = Tag
-        #fields = ('id_owner', 'teleconvertermodel',)
+        auto__include= ('id_owner', 'teleconvertermodel',)
 
 
 class TeleconverterTable(Table):
     class Meta:
         auto__model = Teleconverter
-        #fields = ('id_owner', 'teleconvertermodel',)
+        auto__include= ('id_owner', 'teleconvertermodel',)
 
 
 class TeleconverterModelTable(Table):
     class Meta:
         auto__model = TeleconverterModel
-        #fields = ('model', 'mount', 'factor')
+        auto__include= ('model', 'mount', 'factor')
 
 
 class TonerTable(Table):
     class Meta:        
         auto__model = Toner
-        #fields = ('name', 'formulation', 'stock_dilution')
+        auto__include= ('name', 'formulation', 'stock_dilution')
