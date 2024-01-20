@@ -17,7 +17,7 @@ from .tables import EnlargerTable, FilmStockTable, FilterTable, FlashTable, Flas
 from .tables import ManufacturerTable, MountTable, MountAdapterTable, NegativeSizeTable, PaperStockTable, PersonTable, PrintTable, ProcessTable
 from .tables import ScanTable, NegativeTable, FilmTable, TagTable, TeleconverterTable, TeleconverterModelTable, TonerTable
 
-from .pages import manufacturer_view, IndexPage
+from .pages import accessory_view, archive_view, battery_view, manufacturer_view, IndexPage
 
 # Workaround for https://github.com/iommirocks/iommi/issues/339
 register_factory(GenericRelation, factory=None)
@@ -41,18 +41,18 @@ urlpatterns = [
 #    path('tag-autocomplete/', views.TagAutocomplete.as_view(), name='tag-autocomplete'),
 
     path('accessory/', AccessoryTable().as_view(), name='accessory-list'),
-#    path('accessory/<int:id_owner>', views.AccessoryDetail.as_view(), name='accessory-detail'),
+    path('accessory/<id_owner>/', accessory_view, name='accessory-detail'),
     path('accessory/create', Form.create(auto__model=Accessory).as_view(), name='accessory-create'),
 #    path('accessory/<int:id_owner>/update', views.AccessoryUpdate.as_view(), name='accessory-update'),
 
     path('archive/', ArchiveTable().as_view(), name='archive-list'),
-#    path('archive/<int:id_owner>', views.ArchiveDetail.as_view(), name='archive-detail'),
+    path('archive/<id_owner>/', archive_view, name='archive-detail'),
     path('archive/create', Form.create(auto__model=Archive).as_view(), name='archive-create'),
 #    path('archive/<int:id_owner>/print', views.ArchivePrint.as_view(), name='archive-print'),
 #    path('archive/<int:id_owner>/update', views.ArchiveUpdate.as_view(), name='archive-update'),
 
     path('battery/', BatteryTable().as_view(), name='battery-list'),
-#    path('battery/<slug:slug>', views.BatteryDetail.as_view(), name='battery-detail'),
+    path('battery/<slug>/', battery_view, name='battery-detail'),
     path('battery/create', Form.create(auto__model=Battery).as_view(), name='battery-create'),
 #    path('battery/<slug:slug>/update', views.BatteryUpdate.as_view(), name='battery-update'),
 
