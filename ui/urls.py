@@ -17,7 +17,8 @@ from .tables import EnlargerTable, FilmStockTable, FilterTable, FlashTable, Flas
 from .tables import ManufacturerTable, MountTable, MountAdapterTable, NegativeSizeTable, PaperStockTable, PersonTable, PrintTable, ProcessTable
 from .tables import ScanTable, NegativeTable, FilmTable, TagTable, TeleconverterTable, TeleconverterModelTable, TonerTable
 
-from .pages import accessory_view, archive_view, battery_view, manufacturer_view, IndexPage
+from .pages import accessory_view, archive_view, battery_view, bulkfilm_view, camera_view, cameramodel_view, developer_view
+from .pages import enlargermodel_view, manufacturer_view, IndexPage
 
 # Workaround for https://github.com/iommirocks/iommi/issues/339
 register_factory(GenericRelation, factory=None)
@@ -57,28 +58,28 @@ urlpatterns = [
 #    path('battery/<slug:slug>/update', views.BatteryUpdate.as_view(), name='battery-update'),
 
     path('bulkfilm/', BulkFilmTable().as_view(), name='bulkfilm-list'),
-#    path('bulkfilm/<int:id_owner>', views.BulkFilmDetail.as_view(), name='bulkfilm-detail'),
+    path('bulkfilm/<slug>/', bulkfilm_view, name='bulkfilm-detail'),
     path('bulkfilm/create', Form.create(auto__model=BulkFilm).as_view(), name='bulkfilm-create'),
 #    path('bulkfilm/<int:id_owner>/update', views.BulkFilmUpdate.as_view(), name='bulkfilm-update'),
 
     path('camera/', CameraTable().as_view(), name='camera-list'),
-#    path('camera/<int:id_owner>', views.CameraDetail.as_view(), name='camera-detail'),
+    path('camera/<id_owner>/', camera_view, name='camera-detail'),
     path('camera/create', Form.create(auto__model=Camera).as_view(), name='camera-create'),
 #    path('camera/<int:id_owner>/update', views.CameraUpdate.as_view(), name='camera-update'),
 #    path('camera/<int:id_owner>/sell', views.CameraSell.as_view(), name='camera-sell'),
 
     path('cameramodel/', CameraModelTable().as_view(), name='cameramodel-list'), 
-#    path('cameramodel/<slug:slug>', views.CameraModelDetail.as_view(), name='cameramodel-detail'),
+    path('cameramodel/<slug>/', cameramodel_view, name='cameramodel-detail'),
     path('cameramodel/create', Form.create(auto__model=CameraModel).as_view(), name='cameramodel-create'),
 #    path('cameramodel/<slug:slug>/update', views.CameraModelUpdate.as_view(), name='cameramodel-update'),
 
     path('developer/', DeveloperTable().as_view(), name='developer-list'),
-#    path('developer/<slug:slug>', views.DeveloperDetail.as_view(), name='developer-detail'),
+    path('developer/<slug>/', developer_view, name='developer-detail'),
     path('developer/create', Form.create(auto__model=Developer).as_view(), name='developer-create'),
 #    path('developer/<slug:slug>/update', views.DeveloperUpdate.as_view(), name='developer-update'),
 
     path('enlargermodel/', EnlargerModelTable().as_view(), name='enlargermodel-list'),
-#    path('enlargermodel/<slug:slug>', views.EnlargerModelDetail.as_view(), name='enlargermodel-detail'),
+    path('enlargermodel/<slug>/', enlargermodel_view, name='enlargermodel-detail'),
     path('enlargermodel/create', Form.create(auto__model=EnlargerModel).as_view(), name='enlargermodel-create'),
 #    path('enlargermodel/<slug:slug>/update', views.EnlargerModelUpdate.as_view(), name='enlargermodel-update'),
 
