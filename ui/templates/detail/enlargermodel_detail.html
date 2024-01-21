@@ -35,7 +35,7 @@
   {% if object.negative_size is not None %}
   <tr>
     <td>Negative size</td>
-    <td><a href="{% url 'schema:negativesize-detail' object.negative_size.id %}">{{ object.negative_size }}</a></td>
+    <td><a href="{% url 'negativesize-detail' object.negative_size.id %}">{{ object.negative_size }}</a></td>
   </tr>
   {% endif %}
   {% if object.type is not None %}
@@ -71,7 +71,7 @@
   <tr>
     <td>Tags</td>
     <td>{% for tag in object.tags.all %}
-      <a class="btn btn-outline-primary" href="{% url 'schema:tag-detail' tag.slug %}" role="button">{{ tag.slug }}</a>
+      <a class="btn btn-outline-primary" href="{% url 'tag-detail' tag.slug %}" role="button">{{ tag.slug }}</a>
       {% endfor %}</td>
   </tr>
   {% endif %}
@@ -81,15 +81,11 @@
     <td>
       <ul class="list-inline">
         {% for relateditem in related %}
-        <li class="list-inline-item"><a href="{% url 'schema:enlargermodel-detail' relateditem.slug %}">{{ relateditem }}</a>
+        <li class="list-inline-item"><a href="{% url 'enlargermodel-detail' relateditem.slug %}">{{ relateditem }}</a>
         </li>
         {% endfor %}
       </ul>
     </td>
   </tr>
   {% endif %}
-  <tr>
-    <td>Sharing</td>
-    <td>{% include "sharing.html" %}</td>
-  </tr>
 </table>

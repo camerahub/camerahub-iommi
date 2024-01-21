@@ -42,7 +42,7 @@
   <tr>
     <td>Tags</td>
     <td>{% for tag in object.tags.all %}
-      <a class="btn btn-outline-primary" href="{% url 'schema:tag-detail' tag.slug %}" role="button">{{ tag.slug }}</a>
+      <a class="btn btn-outline-primary" href="{% url 'tag-detail' tag.slug %}" role="button">{{ tag.slug }}</a>
       {% endfor %}</td>
   </tr>
   {% endif %}
@@ -52,14 +52,10 @@
     <td>
       <ul class="list-inline">
         {% for relateditem in related %}
-        <li class="list-inline-item"><a href="{% url 'schema:developer-detail' relateditem.slug %}">{{ relateditem }}</a></li>
+        <li class="list-inline-item"><a href="{% url 'developer-detail' relateditem.slug %}">{{ relateditem }}</a></li>
         {% endfor %}
       </ul>
     </td>
   </tr>
   {% endif %}
-  <tr>
-    <td>Sharing</td>
-    <td>{% include "sharing.html" %}</td>
-  </tr>
 </table>
