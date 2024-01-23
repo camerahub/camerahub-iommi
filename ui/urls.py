@@ -18,7 +18,8 @@ from .tables import ManufacturerTable, MountTable, MountAdapterTable, NegativeSi
 from .tables import ScanTable, NegativeTable, FilmTable, TagTable, TeleconverterTable, TeleconverterModelTable, TonerTable
 
 from .pages import accessory_view, archive_view, battery_view, bulkfilm_view, camera_view, cameramodel_view, developer_view
-from .pages import enlargermodel_view, manufacturer_view, IndexPage
+from .pages import enlargermodel_view, enlarger_view, filmstock_view, filter_view, flash_view, flashmodel_view, format_view
+from .pages import manufacturer_view, IndexPage
 
 # Workaround for https://github.com/iommirocks/iommi/issues/339
 register_factory(GenericRelation, factory=None)
@@ -84,32 +85,32 @@ urlpatterns = [
 #    path('enlargermodel/<slug:slug>/update', views.EnlargerModelUpdate.as_view(), name='enlargermodel-update'),
 
     path('enlarger/', EnlargerTable().as_view(), name='enlarger-list'),
-#    path('enlarger/<int:id_owner>', views.EnlargerDetail.as_view(), name='enlarger-detail'),
+    path('enlarger/<id_owner>/', enlarger_view, name='enlarger-detail'),
     path('enlarger/create', Form.create(auto__model=Enlarger).as_view(), name='enlarger-create'),
 #    path('enlarger/<int:id_owner>/update', views.EnlargerUpdate.as_view(), name='enlarger-update'),
 
     path('filmstock/', FilmStockTable().as_view(), name='filmstock-list'),
-#    path('filmstock/<slug:slug>', views.FilmStockDetail.as_view(), name='filmstock-detail'),
+    path('filmstock/<slug>/', filmstock_view, name='filmstock-detail'),
     path('filmstock/create', Form.create(auto__model=FilmStock).as_view(), name='filmstock-create'),
 #    path('filmstock/<slug:slug>/update', views.FilmStockUpdate.as_view(), name='filmstock-update'),
 
     path('filter/', FilterTable().as_view(), name='filter-list'),
-#    path('filter/<int:pk>', views.FilterDetail.as_view(), name='filter-detail'),
+    path('filter/<pk>/', filter_view, name='filter-detail'),
     path('filter/create', Form.create(auto__model=Filter).as_view(), name='filter-create'),
 #    path('filter/<int:pk>/update', views.FilterUpdate.as_view(), name='filter-update'),
 
     path('flash/', FlashTable().as_view(), name='flash-list'),
-#    path('flash/<int:id_owner>', views.FlashDetail.as_view(), name='flash-detail'),
+    path('flash/<id_owner>/', flash_view, name='flash-detail'),
     path('flash/create', Form.create(auto__model=Flash).as_view(), name='flash-create'),
 #    path('flash/<int:id_owner>/update', views.FlashUpdate.as_view(), name='flash-update'),
 
     path('flashmodel/', FlashModelTable().as_view(), name='flashmodel-list'),
-#    path('flashmodel/<slug:slug>', views.FlashModelDetail.as_view(), name='flashmodel-detail'),
+    path('flashmodel/<slug>/', flashmodel_view, name='flashmodel-detail'),
     path('flashmodel/create', Form.create(auto__model=FlashModel).as_view(), name='flashmodel-create'),
 #    path('flashmodel/<slug:slug>/update', views.FlashModelUpdate.as_view(), name='flashmodel-update'),
 
     path('format/', FormatTable().as_view(), name='format-list'),
-#    path('format/<int:pk>', views.FormatDetail.as_view(), name='format-detail'),
+    path('format/<pk>/', format_view, name='flashmodel-detail'),
     path('format/create', Form.create(auto__model=Format).as_view(), name='format-create'),
 #    path('format/<int:pk>/update', views.FormatUpdate.as_view(), name='format-update'),
 

@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.template import Template, loader
 from iommi import Page, html
 from schema.models import Accessory, Archive, Battery, BulkFilm, Camera, CameraModel, Developer, EnlargerModel, Enlarger
+from schema.models import FilmStock, Filter, Flash, FlashModel, Format, Lens, LensModel, Manufacturer, PaperStock
 
 class IndexPage(Page):
     title = html.h1('Placeholder')
@@ -72,11 +73,65 @@ def developer_view(request, slug):
 def enlargermodel_view(request, slug):
     obj = get_object_or_404(EnlargerModel, slug=slug)
     context={'object':obj}
-    template = loader.get_template("detail/developer_detail.html")
+    template = loader.get_template("detail/enlargermodel_detail.html")
     class EnlargerModelPage(Page):
         title = html.h1(obj.name)
         body = Template(template.render(context, request))
     return EnlargerModelPage(context=context)
+
+def enlarger_view(request, id_owner):
+    obj = get_object_or_404(Enlarger, id_owner=id_owner)
+    context={'object':obj}
+    template = loader.get_template("detail/enlarger_detail.html")
+    class EnlargerPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return EnlargerPage(context=context)
+
+def filmstock_view(request, slug):
+    obj = get_object_or_404(FilmStock, slug=slug)
+    context={'object':obj}
+    template = loader.get_template("detail/filmstock_detail.html")
+    class FilmStockPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return FilmStockPage(context=context)
+
+def filter_view(request, pk):
+    obj = get_object_or_404(Filter, pk=pk)
+    context={'object':obj}
+    template = loader.get_template("detail/filter_detail.html")
+    class FilterPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return FilterPage(context=context)
+
+def flash_view(request, id_owner):
+    obj = get_object_or_404(Flash, id_owner=id_owner)
+    context={'object':obj}
+    template = loader.get_template("detail/flash_detail.html")
+    class FlashPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return FlashPage(context=context)
+
+def flashmodel_view(request, slug):
+    obj = get_object_or_404(FlashModel, slug=slug)
+    context={'object':obj}
+    template = loader.get_template("detail/flashmodel_detail.html")
+    class FlashModelPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return FlashModelPage(context=context)
+
+def format_view(request, pk):
+    obj = get_object_or_404(Format, pk=pk)
+    context={'object':obj}
+    template = loader.get_template("detail/format_detail.html")
+    class FormatPage(Page):
+        title = html.h1(obj.format)
+        body = Template(template.render(context, request))
+    return FormatPage(context=context)
 
 def manufacturer_view(request, slug):
     obj = get_object_or_404(Manufacturer, slug=slug)
