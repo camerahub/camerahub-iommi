@@ -187,3 +187,93 @@ def negativesize_view(request, pk):
         title = html.h1(obj.name)
         body = Template(template.render(context, request))
     return NegativeSizePage(context=context)
+
+def paperstock_view(request, pk):
+    obj = get_object_or_404(PaperStock, pk=pk)
+    context={'object':obj}
+    template = loader.get_template("detail/paperstock_detail.html")
+    class PaperStockPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return PaperStockPage(context=context)
+
+def person_view(request, id_owner):
+    obj = get_object_or_404(Person, id_owner=id_owner)
+    context={'object':obj}
+    template = loader.get_template("detail/person_detail.html")
+    class PersonPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return PersonPage(context=context)
+
+def print_view(request, id_owner):
+    obj = get_object_or_404(Print, id_owner=id_owner)
+    context={'object':obj}
+    template = loader.get_template("detail/print_detail.html")
+    class PrintPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return PrintPage(context=context)
+
+def process_view(request, pk):
+    obj = get_object_or_404(Process, pk=pk)
+    context={'object':obj}
+    template = loader.get_template("detail/process_detail.html")
+    class ProcessPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return ProcessPage(context=context)
+
+def scan_view(request, uuid):
+    obj = get_object_or_404(Scan, uuid=uuid)
+    context={'object':obj}
+    template = loader.get_template("detail/scan_detail.html")
+    class ScanPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return ScanPage(context=context)
+
+def negative_view(request, slug):
+    obj = get_object_or_404(Negative, slug=slug)
+    context={'object':obj}
+    template = loader.get_template("detail/negative_detail.html")
+    class NegativePage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return NegativePage(context=context)
+
+def film_view(request, id_owner):
+    obj = get_object_or_404(Film, id_owner=id_owner)
+    context={'object':obj}
+    template = loader.get_template("detail/film_detail.html")
+    class FilmPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return FilmPage(context=context)
+
+def teleconverter_view(request, id_owner):
+    obj = get_object_or_404(Teleconverter, id_owner=id_owner)
+    context={'object':obj}
+    template = loader.get_template("detail/teleconverter_detail.html")
+    class TeleconverterPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return TeleconverterPage(context=context)
+
+def teleconvertermodel_view(request, slug):
+    obj = get_object_or_404(TeleconverterModel, slug=slug)
+    context={'object':obj}
+    template = loader.get_template("detail/teleconvertermodel_detail.html")
+    class TeleconverterModelPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return TeleconverterModelPage(context=context)
+
+def toner_view(request, slug):
+    obj = get_object_or_404(Toner, slug=slug)
+    context={'object':obj}
+    template = loader.get_template("detail/toner_detail.html")
+    class TonerPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return TonerPage(context=context)

@@ -18,8 +18,9 @@ from .tables import ManufacturerTable, MountTable, MountAdapterTable, NegativeSi
 from .tables import ScanTable, NegativeTable, FilmTable, TagTable, TeleconverterTable, TeleconverterModelTable, TonerTable
 
 from .pages import accessory_view, archive_view, battery_view, bulkfilm_view, camera_view, cameramodel_view, developer_view
-from .pages import enlargermodel_view, enlarger_view, filmstock_view, filter_view, flash_view, flashmodel_view, format_view
-from .pages import lens_view, lensmodel_view, manufacturer_view, mount_view, mountadapter_view, negativesize_view, IndexPage
+from .pages import enlargermodel_view, enlarger_view, film_view, filmstock_view, filter_view, flash_view, flashmodel_view, format_view
+from .pages import lens_view, lensmodel_view, manufacturer_view, mount_view, mountadapter_view, negative_view, negativesize_view, paperstock_view
+from .pages import person_view, print_view, process_view, scan_view, teleconverter_view, teleconvertermodel_view, toner_view, IndexPage
 
 # Workaround for https://github.com/iommirocks/iommi/issues/339
 register_factory(GenericRelation, factory=None)
@@ -146,17 +147,17 @@ urlpatterns = [
     #path('negativesize/<int:pk>/update', views.NegativeSizeUpdate.as_view(), name='negativesize-update'),
 
     path('paperstock/', PaperStockTable().as_view(), name='paperstock-list'),
-#    path('paperstock/<int:pk>', views.PaperStockDetail.as_view(), name='paperstock-detail'),
+    path('paperstock/<pk>/', paperstock_view, name='paperstock-detail'),
     path('paperstock/create', Form.create(auto__model=PaperStock).as_view(), name='paperstock-create'),
 #    path('paperstock/<int:pk>/update', views.PaperStockUpdate.as_view(), name='paperstock-update'),
 
     path('person/', PersonTable().as_view(), name='person-list'),
-#    path('person/<int:id_owner>', views.PersonDetail.as_view(), name='person-detail'),
+    path('person/<id_owner>/', person_view, name='person-detail'),
     path('person/create', Form.create(auto__model=Person).as_view(), name='person-create'),
 #    path('person/<int:id_owner>/update', views.PersonUpdate.as_view(), name='person-update'),
 
     path('print/', PrintTable().as_view(), name='print-list'),
-#    path('print/<int:id_owner>', views.PrintDetail.as_view(), name='print-detail'),
+    path('print/<id_owner>/', print_view, name='print-detail'),
 #    path('print/<int:id_owner>/print', views.PrintPrint.as_view(), name='print-print'),
     path('print/create', Form.create(auto__model=Print).as_view(), name='print-create'),
 #    path('print/<int:id_owner>/update', views.PrintUpdate.as_view(), name='print-update'),
@@ -164,22 +165,22 @@ urlpatterns = [
 #    path('print/<int:id_owner>/sell', views.PrintSell.as_view(), name='print-sell'),
 
     path('process/', ProcessTable().as_view(), name='process-list'),
-#    path('process/<int:pk>', views.ProcessDetail.as_view(), name='process-detail'),
+    path('process/<id_owner>/', process_view, name='process-detail'),
     path('process/create', Form.create(auto__model=Process).as_view(), name='process-create'),
 #    path('process/<int:pk>/update', views.ProcessUpdate.as_view(), name='process-update'),
 
     path('scan/', ScanTable().as_view(), name='scan-list'),
-#    path('scan/<uuid:uuid>', views.ScanDetail.as_view(), name='scan-detail'),
+    path('scan/<uuid>/', scan_view, name='scan-detail'),
     path('scan/create', Form.create(auto__model=Scan).as_view(), name='scan-create'),
 #    path('scan/<uuid:uuid>/update', views.ScanUpdate.as_view(), name='scan-update'),
 
     path('negative/', NegativeTable().as_view(), name='negative-list'),
-#    path('negative/<str:slug>', views.NegativeDetail.as_view(), name='negative-detail'),
+    path('negative/<slug>/', negative_view, name='negative-detail'),
     path('negative/create', Form.create(auto__model=Negative).as_view(), name='negative-create'),
 #    path('negative/<str:slug>/update', views.NegativeUpdate.as_view(), name='negative-update'),
 
     path('film/', FilmTable().as_view(), name='film-list'),
-#    path('film/<int:id_owner>', views.FilmDetail.as_view(), name='film-detail'),
+    path('film/<id_owner>/', film_view, name='film-detail'),
     path('film/create', Form.create(auto__model=Film).as_view(), name='film-create'),
 #    path('film/<int:id_owner>/update', views.FilmUpdate.as_view(), name='film-update'),
 #    path('film/<int:id_owner>/print', views.FilmPrint.as_view(), name='film-print'),
@@ -188,17 +189,17 @@ urlpatterns = [
 #    path('film/<int:id_owner>/archive', views.FilmArchive.as_view(), name='film-archive'),
 
     path('teleconverter/', TeleconverterTable().as_view(), name='teleconverter-list'),
-#    path('teleconverter/<int:id_owner>', views.TeleconverterDetail.as_view(), name='teleconverter-detail'),
+    path('teleconverter/<id_owner>/', teleconverter_view, name='teleconverter-detail'),
     path('teleconverter/create', Form.create(auto__model=Teleconverter).as_view(), name='teleconverter-create'),
 #    path('teleconverter/<int:id_owner>/update', views.TeleconverterUpdate.as_view(), name='teleconverter-update'),
 
     path('teleconvertermodel/', TeleconverterModelTable().as_view(), name='teleconvertermodel-list'),
-#    path('teleconvertermodel/<slug:slug>', views.TeleconverterModelDetail.as_view(), name='teleconvertermodel-detail'),
+    path('teleconvertermodel/<slug>/', teleconvertermodel_view, name='teleconvertermodel-detail'),
     path('teleconvertermodel/create', Form.create(auto__model=TeleconverterModel).as_view(), name='teleconvertermodel-create'),
 #    path('teleconvertermodel/<slug:slug>/update', views.TeleconverterModelUpdate.as_view(), name='teleconvertermodel-update'),
 
     path('toner/', TonerTable().as_view(), name='toner-list'),
-#    path('toner/<slug:slug>', views.TonerDetail.as_view(), name='toner-detail'),
+    path('toner/<slug>/', toner_view, name='toner-detail'),
     path('toner/create', Form.create(auto__model=Toner).as_view(), name='toner-create'),
 #    path('toner/<slug:slug>/update', views.TonerUpdate.as_view(), name='toner-update'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
