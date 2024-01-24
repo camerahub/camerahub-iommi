@@ -2,7 +2,8 @@ from django.shortcuts import get_object_or_404
 from django.template import Template, loader
 from iommi import Page, html
 from schema.models import Accessory, Archive, Battery, BulkFilm, Camera, CameraModel, Developer, EnlargerModel, Enlarger
-from schema.models import FilmStock, Filter, Flash, FlashModel, Format, Lens, LensModel, Manufacturer, PaperStock
+from schema.models import FilmStock, Filter, Flash, FlashModel, Format, Lens, LensModel, Manufacturer, Mount, MountAdapter
+from schema.models import NegativeSize, PaperStock, Person, Print, Process, Scan, Negative, Film, Teleconverter, TeleconverterModel, Toner
 
 class IndexPage(Page):
     title = html.h1('Placeholder')
@@ -133,6 +134,24 @@ def format_view(request, pk):
         body = Template(template.render(context, request))
     return FormatPage(context=context)
 
+def lens_view(request, id_owner):
+    obj = get_object_or_404(Lens, id_owner=id_owner)
+    context={'object':obj}
+    template = loader.get_template("detail/lens_detail.html")
+    class LensPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return LensPage(context=context)
+
+def lensmodel_view(request, slug):
+    obj = get_object_or_404(LensModel, slug=slug)
+    context={'object':obj}
+    template = loader.get_template("detail/lensmodel_detail.html")
+    class LensModelPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return LensModelPage(context=context)
+
 def manufacturer_view(request, slug):
     obj = get_object_or_404(Manufacturer, slug=slug)
     context={'object':obj}
@@ -141,3 +160,30 @@ def manufacturer_view(request, slug):
         title = html.h1(obj.name)
         body = Template(template.render(context, request))
     return ManufacturerPage(context=context)
+
+def mount_view(request, slug):
+    obj = get_object_or_404(Mount, slug=slug)
+    context={'object':obj}
+    template = loader.get_template("detail/mount_detail.html")
+    class MountPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return MountPage(context=context)
+
+def mountadapter_view(request, id_owner):
+    obj = get_object_or_404(MountAdapter, id_owner=id_owner)
+    context={'object':obj}
+    template = loader.get_template("detail/mountadapter_detail.html")
+    class LensPage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return LensPage(context=context)
+
+def negativesize_view(request, pk):
+    obj = get_object_or_404(NegativeSize, pk=pk)
+    context={'object':obj}
+    template = loader.get_template("detail/negativesize_detail.html")
+    class NegativeSizePage(Page):
+        title = html.h1(obj.name)
+        body = Template(template.render(context, request))
+    return NegativeSizePage(context=context)

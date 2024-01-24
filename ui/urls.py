@@ -19,7 +19,7 @@ from .tables import ScanTable, NegativeTable, FilmTable, TagTable, Teleconverter
 
 from .pages import accessory_view, archive_view, battery_view, bulkfilm_view, camera_view, cameramodel_view, developer_view
 from .pages import enlargermodel_view, enlarger_view, filmstock_view, filter_view, flash_view, flashmodel_view, format_view
-from .pages import manufacturer_view, IndexPage
+from .pages import lens_view, lensmodel_view, manufacturer_view, mount_view, mountadapter_view, negativesize_view, IndexPage
 
 # Workaround for https://github.com/iommirocks/iommi/issues/339
 register_factory(GenericRelation, factory=None)
@@ -115,13 +115,13 @@ urlpatterns = [
 #    path('format/<int:pk>/update', views.FormatUpdate.as_view(), name='format-update'),
 
     path('lens/', LensTable().as_view(), name='lens-list'),
-#    path('lens/<int:id_owner>', views.LensDetail.as_view(), name='lens-detail'),
+    path('lens/<id_owner>/', lens_view, name='lens-detail'),
     path('lens/create', Form.create(auto__model=Lens).as_view(), name='lens-create'),
 #    path('lens/<int:id_owner>/update', views.LensUpdate.as_view(), name='lens-update'),
 #    path('lens/<int:id_owner>/sell', views.LensSell.as_view(), name='lens-sell'),
 
     path('lensmodel/', LensModelTable().as_view(), name='lensmodel-list'),
-#    path('lensmodel/<slug:slug>', views.LensModelDetail.as_view(), name='lensmodel-detail'),
+    path('lensmodel/<slug>/', lensmodel_view, name='lensmodel-detail'),
     path('lensmodel/create', Form.create(auto__model=LensModel).as_view(), name='lensmodel-create'),
 #    path('lensmodel/<slug:slug>/update', views.LensModelUpdate.as_view(), name='lensmodel-update'),
 
@@ -131,17 +131,17 @@ urlpatterns = [
     #path('manufacturer/<slug:slug>/update', views.ManufacturerUpdate.as_view(), name='manufacturer-update'),
 
     path('mount/', MountTable().as_view(), name='mount-list'),
-    #path('mount/<slug:slug>', views.MountDetail.as_view(), name='mount-detail'),
+    path('mount/<slug>/', mount_view, name='mount-detail'),         
     #path('mount/create/', views.MountCreate.as_view(), name='mount-create'),
     #path('mount/<slug:slug>/update', views.MountUpdate.as_view(), name='mount-update'),
 
     path('mountadapter/', MountAdapterTable().as_view(), name='mountadapter-list'),
-    #path('mountadapter/<int:id_owner>', views.MountAdapterDetail.as_view(), name='mountadapter-detail'),
+    path('mountadapter/<id_owner>/', mountadapter_view, name='mountadapter-detail'),
     #path('mountadapter/create/', views.MountAdapterCreate.as_view(), name='mountadapter-create'),
     #path('mountadapter/<int:id_owner>/update', views.MountAdapterUpdate.as_view(), name='mountadapter-update'),
 
     path('negativesize/', NegativeSizeTable().as_view(), name='negativesize-list'),
-    #path('negativesize/<int:pk>', views.NegativeSizeDetail.as_view(), name='negativesize-detail'),
+    path('negativesize/<pk>/', negativesize_view, name='negativesize-detail'),
     #path('negativesize/create/', views.NegativeSizeCreate.as_view(), name='negativesize-create'),
     #path('negativesize/<int:pk>/update', views.NegativeSizeUpdate.as_view(), name='negativesize-update'),
 
