@@ -9,8 +9,8 @@ from iommi.path import register_path_decoding
 from taggit.managers import TaggableManager
 
 from schema.models import Accessory, Archive, Battery, BulkFilm, Camera, CameraModel, Developer, EnlargerModel, Enlarger
-from schema.models import FilmStock, Filter, Flash, FlashModel, Format, Lens, LensModel, Manufacturer, PaperStock
-from schema.models import Person, Print, Process, Scan, Negative, Film, Teleconverter, TeleconverterModel, Toner
+from schema.models import FilmStock, Filter, Flash, FlashModel, Format, Lens, LensModel, Manufacturer, Mount, MountAdapter, NegativeSize
+from schema.models import PaperStock, Person, Print, Process, Scan, Negative, Film, Teleconverter, TeleconverterModel, Toner
 
 from .tables import AccessoryTable, ArchiveTable, BatteryTable, BulkFilmTable, CameraTable, CameraModelTable, DeveloperTable, EnlargerModelTable
 from .tables import EnlargerTable, FilmStockTable, FilterTable, FlashTable, FlashModelTable, FormatTable, LensTable, LensModelTable
@@ -21,6 +21,8 @@ from .pages import accessory_view, archive_view, battery_view, bulkfilm_view, ca
 from .pages import enlargermodel_view, enlarger_view, film_view, filmstock_view, filter_view, flash_view, flashmodel_view, format_view
 from .pages import lens_view, lensmodel_view, manufacturer_view, mount_view, mountadapter_view, negative_view, negativesize_view, paperstock_view
 from .pages import person_view, print_view, process_view, scan_view, teleconverter_view, teleconvertermodel_view, toner_view, IndexPage
+
+from .forms import ManufacturerForm
 
 # Workaround for https://github.com/iommirocks/iommi/issues/339
 register_factory(GenericRelation, factory=None)
@@ -127,23 +129,23 @@ urlpatterns = [
 #    path('lensmodel/<slug:slug>/update', views.LensModelUpdate.as_view(), name='lensmodel-update'),
 
     path('manufacturer/', ManufacturerTable().as_view(), name='manufacturer-list'),    
-    path('manufacturer/create', Form.create(auto__model=Manufacturer).as_view(), name='manufacturer-create'),
+    path('manufacturer/create', ManufacturerForm.create().as_view(), name='manufacturer-create'),
     path('manufacturer/<slug>', manufacturer_view, name='manufacturer-detail'),         
     #path('manufacturer/<slug:slug>/update', views.ManufacturerUpdate.as_view(), name='manufacturer-update'),
 
     path('mount/', MountTable().as_view(), name='mount-list'),
     path('mount/<slug>', mount_view, name='mount-detail'),         
-    #path('mount/create/', views.MountCreate.as_view(), name='mount-create'),
+    path('mount/create/', Form.create(auto__model=Mount).as_view(), name='mount-create'),
     #path('mount/<slug:slug>/update', views.MountUpdate.as_view(), name='mount-update'),
 
     path('mountadapter/', MountAdapterTable().as_view(), name='mountadapter-list'),
     path('mountadapter/<id_owner>', mountadapter_view, name='mountadapter-detail'),
-    #path('mountadapter/create/', views.MountAdapterCreate.as_view(), name='mountadapter-create'),
+    path('mountadapter/create/', Form.create(auto__model=MountAdapter).as_view(), name='mountadapter-create'),
     #path('mountadapter/<int:id_owner>/update', views.MountAdapterUpdate.as_view(), name='mountadapter-update'),
 
     path('negativesize/', NegativeSizeTable().as_view(), name='negativesize-list'),
     path('negativesize/<pk>', negativesize_view, name='negativesize-detail'),
-    #path('negativesize/create/', views.NegativeSizeCreate.as_view(), name='negativesize-create'),
+    path('negativesize/create/', Form.create(auto__model=NegativeSize).as_view(), name='negativesize-create'),
     #path('negativesize/<int:pk>/update', views.NegativeSizeUpdate.as_view(), name='negativesize-update'),
 
     path('paperstock/', PaperStockTable().as_view(), name='paperstock-list'),
