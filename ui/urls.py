@@ -22,7 +22,7 @@ from .pages import enlargermodel_view, enlarger_view, film_view, filmstock_view,
 from .pages import lens_view, lensmodel_view, manufacturer_view, mount_view, mountadapter_view, negative_view, negativesize_view, paperstock_view
 from .pages import person_view, print_view, process_view, scan_view, teleconverter_view, teleconvertermodel_view, toner_view, IndexPage
 
-from .forms import ManufacturerForm
+from .forms import battery_edit, cameramodel_edit, manufacturer_edit, manufacturer_create, mount_edit, paperstock_edit, accessory_edit, archive_edit, enlargermodel_edit, developer_edit, format_edit, flashmodel_edit, filmstock_edit, lensmodel_edit, process_edit, filter_edit, flash_edit, teleconverter_edit, teleconvertermodel_edit
 
 # Workaround for https://github.com/iommirocks/iommi/issues/339
 register_factory(GenericRelation, factory=None)
@@ -48,18 +48,18 @@ urlpatterns = [
     path('accessory/', AccessoryTable().as_view(), name='accessory-list'),
     path('accessory/<id_owner>', accessory_view, name='accessory-detail'),
     path('accessory/create', Form.create(auto__model=Accessory).as_view(), name='accessory-create'),
-#    path('accessory/<int:id_owner>/update', views.AccessoryUpdate.as_view(), name='accessory-update'),
+    path('accessory/<int:id_owner>/edit', accessory_edit, name='accessory-update'),
 
     path('archive/', ArchiveTable().as_view(), name='archive-list'),
     path('archive/<id_owner>', archive_view, name='archive-detail'),
     path('archive/create', Form.create(auto__model=Archive).as_view(), name='archive-create'),
 #    path('archive/<int:id_owner>/print', views.ArchivePrint.as_view(), name='archive-print'),
-#    path('archive/<int:id_owner>/update', views.ArchiveUpdate.as_view(), name='archive-update'),
+    path('archive/<int:id_owner>/edit', archive_edit, name='archive-update'),
 
     path('battery/', BatteryTable().as_view(), name='battery-list'),
     path('battery/<slug>', battery_view, name='battery-detail'),
     path('battery/create', Form.create(auto__model=Battery).as_view(), name='battery-create'),
-#    path('battery/<slug:slug>/update', views.BatteryUpdate.as_view(), name='battery-update'),
+    path('battery/<slug:slug>/edit', battery_edit, name='battery-update'),
 
     path('bulkfilm/', BulkFilmTable().as_view(), name='bulkfilm-list'),
     path('bulkfilm/<slug>', bulkfilm_view, name='bulkfilm-detail'),
@@ -75,17 +75,17 @@ urlpatterns = [
     path('cameramodel/', CameraModelTable().as_view(), name='cameramodel-list'), 
     path('cameramodel/<slug>', cameramodel_view, name='cameramodel-detail'),
     path('cameramodel/create', Form.create(auto__model=CameraModel).as_view(), name='cameramodel-create'),
-#    path('cameramodel/<slug:slug>/update', views.CameraModelUpdate.as_view(), name='cameramodel-update'),
+    path('cameramodel/<slug:slug>/edit', cameramodel_edit, name='cameramodel-update'),
 
     path('developer/', DeveloperTable().as_view(), name='developer-list'),
     path('developer/<slug>', developer_view, name='developer-detail'),
     path('developer/create', Form.create(auto__model=Developer).as_view(), name='developer-create'),
-#    path('developer/<slug:slug>/update', views.DeveloperUpdate.as_view(), name='developer-update'),
+    path('developer/<slug:slug>/edit', developer_edit, name='developer-update'),
 
     path('enlargermodel/', EnlargerModelTable().as_view(), name='enlargermodel-list'),
     path('enlargermodel/<slug>', enlargermodel_view, name='enlargermodel-detail'),
     path('enlargermodel/create', Form.create(auto__model=EnlargerModel).as_view(), name='enlargermodel-create'),
-#    path('enlargermodel/<slug:slug>/update', views.EnlargerModelUpdate.as_view(), name='enlargermodel-update'),
+    path('enlargermodel/<slug:slug>/edit', enlargermodel_edit, name='enlargermodel-update'),
 
     path('enlarger/', EnlargerTable().as_view(), name='enlarger-list'),
     path('enlarger/<id_owner>', enlarger_view, name='enlarger-detail'),
@@ -95,27 +95,27 @@ urlpatterns = [
     path('filmstock/', FilmStockTable().as_view(), name='filmstock-list'),
     path('filmstock/<slug>', filmstock_view, name='filmstock-detail'),
     path('filmstock/create', Form.create(auto__model=FilmStock).as_view(), name='filmstock-create'),
-#    path('filmstock/<slug:slug>/update', views.FilmStockUpdate.as_view(), name='filmstock-update'),
+    path('filmstock/<slug:slug>/edit', filmstock_edit, name='filmstock-update'),
 
     path('filter/', FilterTable().as_view(), name='filter-list'),
     path('filter/<pk>', filter_view, name='filter-detail'),
     path('filter/create', Form.create(auto__model=Filter).as_view(), name='filter-create'),
-#    path('filter/<int:pk>/update', views.FilterUpdate.as_view(), name='filter-update'),
+    path('filter/<int:pk>/edit', filter_edit, name='filter-update'),
 
     path('flash/', FlashTable().as_view(), name='flash-list'),
     path('flash/<id_owner>', flash_view, name='flash-detail'),
     path('flash/create', Form.create(auto__model=Flash).as_view(), name='flash-create'),
-#    path('flash/<int:id_owner>/update', views.FlashUpdate.as_view(), name='flash-update'),
+    path('flash/<int:id_owner>/edit', flash_edit, name='flash-update'),
 
     path('flashmodel/', FlashModelTable().as_view(), name='flashmodel-list'),
     path('flashmodel/<slug>', flashmodel_view, name='flashmodel-detail'),
     path('flashmodel/create', Form.create(auto__model=FlashModel).as_view(), name='flashmodel-create'),
-#    path('flashmodel/<slug:slug>/update', views.FlashModelUpdate.as_view(), name='flashmodel-update'),
+    path('flashmodel/<slug:slug>/edit', flashmodel_edit, name='flashmodel-update'),
 
     path('format/', FormatTable().as_view(), name='format-list'),
     path('format/<pk>', format_view, name='flashmodel-detail'),
     path('format/create', Form.create(auto__model=Format).as_view(), name='format-create'),
-#    path('format/<int:pk>/update', views.FormatUpdate.as_view(), name='format-update'),
+    path('format/<int:pk>/edit', format_edit, name='format-update'),
 
     path('lens/', LensTable().as_view(), name='lens-list'),
     path('lens/<id_owner>', lens_view, name='lens-detail'),
@@ -126,7 +126,7 @@ urlpatterns = [
     path('lensmodel/', LensModelTable().as_view(), name='lensmodel-list'),
     path('lensmodel/<slug>', lensmodel_view, name='lensmodel-detail'),
     path('lensmodel/create', Form.create(auto__model=LensModel).as_view(), name='lensmodel-create'),
-#    path('lensmodel/<slug:slug>/update', views.LensModelUpdate.as_view(), name='lensmodel-update'),
+    path('lensmodel/<slug:slug>/edit', lensmodel_edit, name='lensmodel-update'),
 
     path('manufacturer/', ManufacturerTable().as_view(), name='manufacturer-list'),    
     path('manufacturer/create', ManufacturerForm.create().as_view(), name='manufacturer-create'),
@@ -136,7 +136,7 @@ urlpatterns = [
     path('mount/', MountTable().as_view(), name='mount-list'),
     path('mount/<slug>', mount_view, name='mount-detail'),         
     path('mount/create/', Form.create(auto__model=Mount).as_view(), name='mount-create'),
-    #path('mount/<slug:slug>/update', views.MountUpdate.as_view(), name='mount-update'),
+    path('mount/<slug:slug>/edit', mount_edit, name='mount-update'),
 
     path('mountadapter/', MountAdapterTable().as_view(), name='mountadapter-list'),
     path('mountadapter/<id_owner>', mountadapter_view, name='mountadapter-detail'),
@@ -151,7 +151,7 @@ urlpatterns = [
     path('paperstock/', PaperStockTable().as_view(), name='paperstock-list'),
     path('paperstock/<pk>', paperstock_view, name='paperstock-detail'),
     path('paperstock/create', Form.create(auto__model=PaperStock).as_view(), name='paperstock-create'),
-#    path('paperstock/<int:pk>/update', views.PaperStockUpdate.as_view(), name='paperstock-update'),
+    path('paperstock/<int:pk>/edit', paperstock_edit, name='paperstock-update'),
 
     path('person/', PersonTable().as_view(), name='person-list'),
     path('person/<id_owner>', person_view, name='person-detail'),
@@ -169,7 +169,7 @@ urlpatterns = [
     path('process/', ProcessTable().as_view(), name='process-list'),
     path('process/<id_owner>', process_view, name='process-detail'),
     path('process/create', Form.create(auto__model=Process).as_view(), name='process-create'),
-#    path('process/<int:pk>/update', views.ProcessUpdate.as_view(), name='process-update'),
+    path('process/<int:pk>/edit', process_edit, name='process-update'),
 
     path('scan/', ScanTable().as_view(), name='scan-list'),
     path('scan/<uuid>', scan_view, name='scan-detail'),
@@ -193,12 +193,12 @@ urlpatterns = [
     path('teleconverter/', TeleconverterTable().as_view(), name='teleconverter-list'),
     path('teleconverter/<id_owner>', teleconverter_view, name='teleconverter-detail'),
     path('teleconverter/create', Form.create(auto__model=Teleconverter).as_view(), name='teleconverter-create'),
-#    path('teleconverter/<int:id_owner>/update', views.TeleconverterUpdate.as_view(), name='teleconverter-update'),
+    path('teleconverter/<int:id_owner>/edit', teleconverter_edit, name='teleconverter-update'),
 
     path('teleconvertermodel/', TeleconverterModelTable().as_view(), name='teleconvertermodel-list'),
     path('teleconvertermodel/<slug>', teleconvertermodel_view, name='teleconvertermodel-detail'),
     path('teleconvertermodel/create', Form.create(auto__model=TeleconverterModel).as_view(), name='teleconvertermodel-create'),
-#    path('teleconvertermodel/<slug:slug>/update', views.TeleconverterModelUpdate.as_view(), name='teleconvertermodel-update'),
+    path('teleconvertermodel/<slug:slug>/edit', teleconvertermodel_edit, name='teleconvertermodel-update'),
 
     path('toner/', TonerTable().as_view(), name='toner-list'),
     path('toner/<slug>', toner_view, name='toner-detail'),
