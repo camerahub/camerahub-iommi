@@ -1,5 +1,6 @@
 from iommi import Form
 from schema.models import Battery, CameraModel, Manufacturer, Mount, PaperStock, Accessory, Archive, EnlargerModel, Developer, Format, FlashModel, FilmStock, LensModel, Process, Filter, Flash, Teleconverter, TeleconverterModel
+from schema.models import Enlarger, BulkFilm, Camera, Lens, MountAdapter, NegativeSize
 
 def battery_edit(request, slug):
     return Form.edit(
@@ -94,4 +95,34 @@ def teleconvertermodel_edit(request, slug):
 def teleconverter_edit(request, slug):
     return Form.edit(
         auto__instance=Teleconverter.objects.get(slug=slug),
+    )
+
+def enlarger_edit(request, slug):
+    return Form.edit(
+        auto__instance=Enlarger.objects.get(slug=slug),
+    )
+
+def bulkfilm_edit(request, slug):
+    return Form.edit(
+        auto__instance=BulkFilm.objects.get(slug=slug),
+    )
+
+def camera_edit(request, slug):
+    return Form.edit(
+        auto__instance=Camera.objects.get(slug=slug),
+    )
+
+def lens_edit(request, slug):
+    return Form.edit(
+        auto__instance=Lens.objects.get(slug=slug),
+    )
+
+def mountadapter_edit(request, slug):
+    return Form.edit(
+        auto__instance=MountAdapter.objects.get(slug=slug),
+    )
+
+def negativesize_edit(request, slug):
+    return Form.edit(
+        auto__instance=NegativeSize.objects.get(slug=slug),
     )

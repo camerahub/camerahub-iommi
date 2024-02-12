@@ -64,12 +64,12 @@ urlpatterns = [
     path('bulkfilm/', BulkFilmTable().as_view(), name='bulkfilm-list'),
     path('bulkfilm/<slug>', bulkfilm_view, name='bulkfilm-detail'),
     path('bulkfilm/create', Form.create(auto__model=BulkFilm).as_view(), name='bulkfilm-create'),
-#    path('bulkfilm/<int:id_owner>/update', views.BulkFilmUpdate.as_view(), name='bulkfilm-update'),
+    path('bulkfilm/<int:id_owner>/edit', bulkfilm_edit, name='bulkfilm-update'),
 
     path('camera/', CameraTable().as_view(), name='camera-list'),
     path('camera/<id_owner>', camera_view, name='camera-detail'),
     path('camera/create', Form.create(auto__model=Camera).as_view(), name='camera-create'),
-#    path('camera/<int:id_owner>/update', views.CameraUpdate.as_view(), name='camera-update'),
+    path('camera/<int:id_owner>/edit', camera_edit, name='camera-update'),
 #    path('camera/<int:id_owner>/sell', views.CameraSell.as_view(), name='camera-sell'),
 
     path('cameramodel/', CameraModelTable().as_view(), name='cameramodel-list'), 
@@ -90,7 +90,7 @@ urlpatterns = [
     path('enlarger/', EnlargerTable().as_view(), name='enlarger-list'),
     path('enlarger/<id_owner>', enlarger_view, name='enlarger-detail'),
     path('enlarger/create', Form.create(auto__model=Enlarger).as_view(), name='enlarger-create'),
-#    path('enlarger/<int:id_owner>/update', views.EnlargerUpdate.as_view(), name='enlarger-update'),
+    path('enlarger/<int:id_owner>/edit', enlarger_edit, name='enlarger-update'),
 
     path('filmstock/', FilmStockTable().as_view(), name='filmstock-list'),
     path('filmstock/<slug>', filmstock_view, name='filmstock-detail'),
@@ -120,7 +120,7 @@ urlpatterns = [
     path('lens/', LensTable().as_view(), name='lens-list'),
     path('lens/<id_owner>', lens_view, name='lens-detail'),
     path('lens/create', Form.create(auto__model=Lens).as_view(), name='lens-create'),
-#    path('lens/<int:id_owner>/update', views.LensUpdate.as_view(), name='lens-update'),
+    path('lens/<int:id_owner>/edit', lens_edit, name='lens-update'),
 #    path('lens/<int:id_owner>/sell', views.LensSell.as_view(), name='lens-sell'),
 
     path('lensmodel/', LensModelTable().as_view(), name='lensmodel-list'),
@@ -141,12 +141,12 @@ urlpatterns = [
     path('mountadapter/', MountAdapterTable().as_view(), name='mountadapter-list'),
     path('mountadapter/<id_owner>', mountadapter_view, name='mountadapter-detail'),
     path('mountadapter/create/', Form.create(auto__model=MountAdapter).as_view(), name='mountadapter-create'),
-    #path('mountadapter/<int:id_owner>/update', views.MountAdapterUpdate.as_view(), name='mountadapter-update'),
+    path('mountadapter/<int:id_owner>/edit', mountadapter_edit, name='mountadapter-update'),
 
     path('negativesize/', NegativeSizeTable().as_view(), name='negativesize-list'),
     path('negativesize/<pk>', negativesize_view, name='negativesize-detail'),
     path('negativesize/create/', Form.create(auto__model=NegativeSize).as_view(), name='negativesize-create'),
-    #path('negativesize/<int:pk>/update', views.NegativeSizeUpdate.as_view(), name='negativesize-update'),
+    path('negativesize/<int:pk>/edit', negativesize_edit, name='negativesize-update'),
 
     path('paperstock/', PaperStockTable().as_view(), name='paperstock-list'),
     path('paperstock/<pk>', paperstock_view, name='paperstock-detail'),
