@@ -23,6 +23,7 @@ from .pages import lens_view, lensmodel_view, manufacturer_view, mount_view, mou
 from .pages import person_view, print_view, process_view, scan_view, teleconverter_view, teleconvertermodel_view, toner_view, IndexPage
 
 from .forms import battery_edit, cameramodel_edit, manufacturer_edit, manufacturer_create, mount_edit, paperstock_edit, accessory_edit, archive_edit, enlargermodel_edit, developer_edit, format_edit, flashmodel_edit, filmstock_edit, lensmodel_edit, process_edit, filter_edit, flash_edit, teleconverter_edit, teleconvertermodel_edit
+from .forms import enlarger_edit, bulkfilm_edit, camera_edit, lens_edit, mountadapter_edit, negativesize_edit, person_edit, scan_edit, negative_edit, film_edit, print_edit, toner_edit
 
 # Workaround for https://github.com/iommirocks/iommi/issues/339
 register_factory(GenericRelation, factory=None)
@@ -129,9 +130,9 @@ urlpatterns = [
     path('lensmodel/<slug:slug>/edit', lensmodel_edit, name='lensmodel-update'),
 
     path('manufacturer/', ManufacturerTable().as_view(), name='manufacturer-list'),    
-    path('manufacturer/create', ManufacturerForm.create().as_view(), name='manufacturer-create'),
-    path('manufacturer/<slug>', manufacturer_view, name='manufacturer-detail'),         
-    #path('manufacturer/<slug:slug>/update', views.ManufacturerUpdate.as_view(), name='manufacturer-update'),
+    path('manufacturer/create', manufacturer_create, name='manufacturer-create'),
+    path('manufacturer/<manufacturer_slug>', manufacturer_view, name='manufacturer-detail'),         
+    path('manufacturer/<manufacturer_slug>/edit', manufacturer_edit, name='manufacturer-update'),
 
     path('mount/', MountTable().as_view(), name='mount-list'),
     path('mount/<slug>', mount_view, name='mount-detail'),         
@@ -156,13 +157,13 @@ urlpatterns = [
     path('person/', PersonTable().as_view(), name='person-list'),
     path('person/<id_owner>', person_view, name='person-detail'),
     path('person/create', Form.create(auto__model=Person).as_view(), name='person-create'),
-#    path('person/<int:id_owner>/update', views.PersonUpdate.as_view(), name='person-update'),
+    path('person/<int:id_owner>/edit', person_edit, name='person-update'),
 
     path('print/', PrintTable().as_view(), name='print-list'),
     path('print/<id_owner>', print_view, name='print-detail'),
 #    path('print/<int:id_owner>/print', views.PrintPrint.as_view(), name='print-print'),
     path('print/create', Form.create(auto__model=Print).as_view(), name='print-create'),
-#    path('print/<int:id_owner>/update', views.PrintUpdate.as_view(), name='print-update'),
+    path('print/<int:id_owner>/edit', print_edit, name='print-update'),
 #    path('print/<int:id_owner>/archive', views.PrintArchive.as_view(), name='print-archive'),
 #    path('print/<int:id_owner>/sell', views.PrintSell.as_view(), name='print-sell'),
 
@@ -174,17 +175,17 @@ urlpatterns = [
     path('scan/', ScanTable().as_view(), name='scan-list'),
     path('scan/<uuid>', scan_view, name='scan-detail'),
     path('scan/create', Form.create(auto__model=Scan).as_view(), name='scan-create'),
-#    path('scan/<uuid:uuid>/update', views.ScanUpdate.as_view(), name='scan-update'),
+    path('scan/<uuid:uuid>/edit', scan_edit, name='scan-update'),
 
     path('negative/', NegativeTable().as_view(), name='negative-list'),
     path('negative/<slug>', negative_view, name='negative-detail'),
     path('negative/create', Form.create(auto__model=Negative).as_view(), name='negative-create'),
-#    path('negative/<str:slug>/update', views.NegativeUpdate.as_view(), name='negative-update'),
+    path('negative/<str:slug>/edit', negative_edit, name='negative-update'),
 
     path('film/', FilmTable().as_view(), name='film-list'),
     path('film/<id_owner>', film_view, name='film-detail'),
     path('film/create', Form.create(auto__model=Film).as_view(), name='film-create'),
-#    path('film/<int:id_owner>/update', views.FilmUpdate.as_view(), name='film-update'),
+    path('film/<int:id_owner>/edit', film_edit, name='film-update'),
 #    path('film/<int:id_owner>/print', views.FilmPrint.as_view(), name='film-print'),
 #    path('film/<int:id_owner>/load', views.FilmLoad.as_view(), name='film-load'),
 #    path('film/<int:id_owner>/develop', views.FilmDevelop.as_view(), name='film-develop'),
@@ -203,5 +204,5 @@ urlpatterns = [
     path('toner/', TonerTable().as_view(), name='toner-list'),
     path('toner/<slug>', toner_view, name='toner-detail'),
     path('toner/create', Form.create(auto__model=Toner).as_view(), name='toner-create'),
-#    path('toner/<slug:slug>/update', views.TonerUpdate.as_view(), name='toner-update'),
+    path('toner/<slug:slug>/edit', toner_edit, name='toner-update'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
