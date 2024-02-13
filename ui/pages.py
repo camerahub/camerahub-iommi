@@ -166,7 +166,7 @@ def mount_view(request, slug):
     context={'object':obj}
     template = loader.get_template("detail/mount_detail.html")
     class MountPage(Page):
-        title = html.h1(obj.name)
+        title = html.h1(obj.mount)
         body = Template(template.render(context, request))
     return MountPage(context=context)
 

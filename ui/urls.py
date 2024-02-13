@@ -31,7 +31,8 @@ register_factory(GenericForeignKey, factory=None)
 register_factory(TaggableManager, shortcut_name='many_to_many')
 
 register_path_decoding(
-    manufacturer_name=Manufacturer.name,
+    #manufacturer_name=Manufacturer.name,
+    manufacturer_slug=Manufacturer.slug,
     manufacturer_pk=Manufacturer,
 )
 
@@ -131,8 +132,8 @@ urlpatterns = [
 
     path('manufacturer/', ManufacturerTable().as_view(), name='manufacturer-list'),    
     path('manufacturer/create', manufacturer_create, name='manufacturer-create'),
-    path('manufacturer/<manufacturer_slug>', manufacturer_view, name='manufacturer-detail'),         
-    path('manufacturer/<manufacturer_slug>/edit', manufacturer_edit, name='manufacturer-update'),
+    path('manufacturer/<slug:slug>', manufacturer_view, name='manufacturer-detail'),         
+    path('manufacturer/<slug:slug>/edit', manufacturer_edit, name='manufacturer-update'),
 
     path('mount/', MountTable().as_view(), name='mount-list'),
     path('mount/<slug>', mount_view, name='mount-detail'),         

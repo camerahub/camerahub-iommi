@@ -12,14 +12,14 @@ def cameramodel_edit(request, slug):
         auto__instance=CameraModel.objects.get(slug=slug),
     )
 
-def manufacturer_create(request, manufacturer_slug):
+def manufacturer_create(request, slug):
     return Form.create(
         auto__model=Manufacturer
     )
 
-def manufacturer_edit(request, manufacturer_slug):
+def manufacturer_edit(request, slug):
     return Form.edit(
-        auto__instance=Manufacturer.objects.get(slug=manufacturer_slug),
+        auto__instance=Manufacturer.objects.get(slug=slug),
     )
 
 def mount_edit(request, slug):
