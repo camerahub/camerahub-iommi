@@ -12,14 +12,14 @@ def cameramodel_edit(request, slug):
         auto__instance=CameraModel.objects.get(slug=slug),
     )
 
-def manufacturer_create(request, slug):
+def manufacturer_create(request, manufacturer_slug):
     return Form.create(
         auto__model=Manufacturer
     )
 
-def manufacturer_edit(request, slug):
+def manufacturer_edit(request, manufacturer_slug):
     return Form.edit(
-        auto__instance=Manufacturer.objects.get(slug=slug),
+        auto__instance=Manufacturer.objects.get(slug=manufacturer_slug),
     )
 
 def mount_edit(request, slug):
@@ -52,9 +52,9 @@ def developer_edit(request, slug):
         auto__instance=Developer.objects.get(slug=slug),
     )
 
-def format_edit(request, slug):
+def format_edit(request, pk):
     return Form.edit(
-        auto__instance=Format.objects.get(slug=slug),
+        auto__instance=Format.objects.get(pk=pk),
     )
 
 def flashmodel_edit(request, slug):
@@ -72,19 +72,19 @@ def lensmodel_edit(request, slug):
         auto__instance=LensModel.objects.get(slug=slug),
     )
 
-def process_edit(request, slug):
+def process_edit(request, pk):
     return Form.edit(
-        auto__instance=Process.objects.get(slug=slug),
+        auto__instance=Process.objects.get(pk=pk),
     )
 
-def filter_edit(request, slug):
+def filter_edit(request, pk):
     return Form.edit(
-        auto__instance=Filter.objects.get(slug=slug),
+        auto__instance=Filter.objects.get(pk=pk),
     )
 
-def flash_edit(request, slug):
+def flash_edit(request, id_owner):
     return Form.edit(
-        auto__instance=Flash.objects.get(slug=slug),
+        auto__instance=Flash.objects.get(id_owner=id_owner),
     )
 
 def teleconvertermodel_edit(request, slug):
@@ -92,49 +92,49 @@ def teleconvertermodel_edit(request, slug):
         auto__instance=TeleconverterModel.objects.get(slug=slug),
     )
 
-def teleconverter_edit(request, slug):
+def teleconverter_edit(request, id_owner):
     return Form.edit(
-        auto__instance=Teleconverter.objects.get(slug=slug),
+        auto__instance=Teleconverter.objects.get(id_owner=id_owner),
     )
 
-def enlarger_edit(request, slug):
+def enlarger_edit(request, id_owner):
     return Form.edit(
-        auto__instance=Enlarger.objects.get(slug=slug),
+        auto__instance=Enlarger.objects.get(id_owner=id_owner),
     )
 
-def bulkfilm_edit(request, slug):
+def bulkfilm_edit(request, id_owner):
     return Form.edit(
-        auto__instance=BulkFilm.objects.get(slug=slug),
+        auto__instance=BulkFilm.objects.get(id_owner=id_owner),
     )
 
-def camera_edit(request, slug):
+def camera_edit(request, id_owner):
     return Form.edit(
-        auto__instance=Camera.objects.get(slug=slug),
+        auto__instance=Camera.objects.get(id_owner=id_owner),
     )
 
-def lens_edit(request, slug):
+def lens_edit(request, id_owner):
     return Form.edit(
-        auto__instance=Lens.objects.get(slug=slug),
+        auto__instance=Lens.objects.get(id_owner=id_owner),
     )
 
-def mountadapter_edit(request, slug):
+def mountadapter_edit(request, id_owner):
     return Form.edit(
-        auto__instance=MountAdapter.objects.get(slug=slug),
+        auto__instance=MountAdapter.objects.get(id_owner=id_owner),
     )
 
-def negativesize_edit(request, slug):
+def negativesize_edit(request, pk):
     return Form.edit(
-        auto__instance=NegativeSize.objects.get(slug=slug),
+        auto__instance=NegativeSize.objects.get(pk=pk),
     )
 
-def person_edit(request, slug):
+def person_edit(request, id_owner):
     return Form.edit(
-        auto__instance=Person.objects.get(slug=slug),
+        auto__instance=Person.objects.get(id_owner=id_owner),
     )
 
-def scan_edit(request, slug):
+def scan_edit(request, uuid):
     return Form.edit(
-        auto__instance=Scan.objects.get(slug=slug),
+        auto__instance=Scan.objects.get(uuid=uuid),
     )
 
 def negative_edit(request, slug):
@@ -142,14 +142,14 @@ def negative_edit(request, slug):
         auto__instance=Negative.objects.get(slug=slug),
     )
 
-def film_edit(request, slug):
+def film_edit(request, id_owner):
     return Form.edit(
-        auto__instance=Film.objects.get(slug=slug),
+        auto__instance=Film.objects.get(id_owner=id_owner),
     )
 
-def print_edit(request, slug):
+def print_edit(request, id_owner):
     return Form.edit(
-        auto__instance=Print.objects.get(slug=slug),
+        auto__instance=Print.objects.get(id_owner=id_owner),
     )
 
 def toner_edit(request, slug):
